@@ -8,6 +8,7 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "ipykernel>=7.4.0",
     "langchain-nvidia-ai-endpoints>=1.5.0",
     "langgraph>=1.2.15",
     "pydantic>=2.14.1",
