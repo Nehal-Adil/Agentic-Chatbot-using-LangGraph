@@ -13,6 +13,7 @@ dependencies = [
     "langgraph>=1.2.15",
     "pydantic>=2.14.1",
     "python-dotenv>=1.2.4",
+    "streamlit>=1.66.0",
 ]
 
 [project.scripts]
