@@ -1,7 +1,7 @@
 import streamlit as st
 import uuid
 from langchain_core.messages import HumanMessage, AIMessage
-from chatbot_backend import chatbot
+from chatbot_backend import chatbot, get_all_threads
 
 # Generate a unique thread ID for each new conversation
 def generate_thread_id():
@@ -46,27 +46,20 @@ def load_conversation(thread_id):
     # Return an empty list if no messages are available
     return state.values.get("messages", [])
 
-
-
 # Display the main application title
 st.title("Agentic Chatbot with LangGraph")
-
 
 # Create message_history when the app runs for the first time
 if "message_history" not in st.session_state:
     st.session_state["message_history"] = []
 
-
 # Create a thread ID when the app runs for the first time
 if "thread_id" not in st.session_state:
     st.session_state["thread_id"] = generate_thread_id()
 
-
 # Create a list for storing all conversation thread IDs
 if "chat_threads" not in st.session_state:
-    st.session_state["chat_threads"] = []
-
-
+    st.session_state["chat_threads"] = get_all_threads()
 
 # Add the current thread to the conversation list
 add_thread(st.session_state["thread_id"])
@@ -152,7 +145,6 @@ for message in st.session_state["message_history"]:
 
         # Display the message content
         st.text(message["content"])
-
 
 
 # Create the chat input box

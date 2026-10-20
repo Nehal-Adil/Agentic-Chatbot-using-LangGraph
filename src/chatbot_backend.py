@@ -3,7 +3,8 @@ from typing import TypedDict, Annotated
 from langchain_core.messages import BaseMessage, HumanMessage
 from langchain_nvidia_ai_endpoints import ChatNVIDIA
 from dotenv import load_dotenv
-from langgraph.checkpoint.memory import MemorySaver
+from langgraph.checkpoint.sqlite import SqliteSaver
+import sqlite3
 
 load_dotenv()
 
@@ -28,9 +29,11 @@ def chat_node(state: ChatState):
     response = llm.invoke(messages)
     return {'messages': [response]}
 
-# Add Graph
-checkpoint = MemorySaver()
+# connect to database
+conn = sqlite3.connect(database="chatbot.db", check_same_thread=False)
+checkpoint = SqliteSaver(conn)
 
+# Add Graph
 graph = StateGraph(ChatState)
 
 graph.add_node('chat_node', chat_node)
@@ -40,3 +43,11 @@ graph.add_edge(START, 'chat_node')
 graph.add_edge('chat_node', END)
 
 chatbot = graph.compile(checkpointer=checkpoint)
+
+def get_all_threads():
+    all_threads = set()
+    for thread in checkpoint.list(None):
+        all_threads.add(thread.config['configurable']['thread_id'])
+
+    return list(all_threads)
+     
