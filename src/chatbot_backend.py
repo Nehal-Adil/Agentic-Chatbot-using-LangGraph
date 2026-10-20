@@ -10,7 +10,7 @@ load_dotenv()
 
 # NVIDIA LLM Model
 llm = ChatNVIDIA(
-    model="nvidia/nemotron-3-super-120b-a12b",
+    model="nvidia/nemotron-3.5-super-vl-120b-a12b",
     temperature=0,
 )
 

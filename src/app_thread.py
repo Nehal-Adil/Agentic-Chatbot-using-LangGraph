@@ -168,10 +168,20 @@ if user_input:
 
     # Pass the current thread ID to LangGraph
     # LangGraph uses this ID to save and retrieve conversation memory
+    # CONFIG = {
+    #     "configurable": {
+    #         "thread_id": st.session_state["thread_id"]
+    #     }
+    # }
+
     CONFIG = {
         "configurable": {
             "thread_id": st.session_state["thread_id"]
-        }
+        },
+        "metadata": {
+            "thread_id": st.session_state["thread_id"]
+        },
+        "run_name": "chat-trace"
     }
 
 
