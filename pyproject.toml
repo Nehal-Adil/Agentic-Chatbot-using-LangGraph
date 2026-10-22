@@ -10,11 +10,13 @@ requires-python = ">=3.14"
 dependencies = [
     "ipykernel>=7.4.0",
     "langchain-nvidia-ai-endpoints>=1.5.0",
+    "langchain-tavily>=0.2.18",
     "langgraph>=1.2.15",
     "langgraph-checkpoint-sqlite>=3.1.2",
     "pydantic>=2.14.1",
     "python-dotenv>=1.2.4",
     "streamlit>=1.66.0",
+    "tavily-python>=0.8.5",
 ]
 
 [project.scripts]
